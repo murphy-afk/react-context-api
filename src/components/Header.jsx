@@ -5,9 +5,6 @@ import { useBudgetMode } from "../context/BudgetContext";
 export default function Header() {
   const { test, budgetMode, setBudgetMode } = useBudgetMode();
 
-  console.log(test);
-
-
   return (
     <>
       <nav className="d-flex bg-dark text-light ps-4 align-items-center justify-content-between">

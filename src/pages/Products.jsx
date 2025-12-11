@@ -19,7 +19,7 @@ export default function Products() {
       .then((resp) => {
         const prodData = resp.data;
         if (budgetMode) {
-          const filteredProdData = prodData.filter((prod) => prod.price < 30);
+          const filteredProdData = prodData.filter((prod) => prod.price <= 30);
           setProducts(filteredProdData);
         }
         else {
