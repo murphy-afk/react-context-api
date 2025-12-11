@@ -3,8 +3,8 @@ import { createContext, useState, useContext } from "react";
 const CollectionsContext = createContext();
 
 function CollectionsProvider({ children }) {
-  const [favourites, setFavourites] = useState([1,2,3]);
-  const [cart, setCart] = useState([1,2,3]);
+  const [favourites, setFavourites] = useState([]);
+  const [cart, setCart] = useState([]);
 
   function isFavourite(id) {
     return favourites.includes(id)
