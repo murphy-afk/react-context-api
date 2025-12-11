@@ -1,16 +1,13 @@
 import { useCollections } from "../context/CollectionsContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Card from "../components/Card";
 
 export default function Favourites() {
   const [favItems, setFavItems] = useState([]);
   const { favourites } = useCollections();
 
   useEffect(() => {
-    if (favourites.length === 0) {
-      setFavItems([]);
-      return;
-    }
 
     axios.get("https://fakestoreapi.com/products")
       .then((resp) => {
@@ -33,17 +30,13 @@ export default function Favourites() {
           <p>No favourites yet</p>
         </div>
       ) : (
-        <div>
-          <h1>There are {favourites.length} products in your favourites list</h1>
-          
+        <div className="container">
+          <p className="text-light">There are {favourites.length} products in your favourites list</p>
+          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
             {favItems.map((prod) => (
-              <div key={prod.id} className="row text-center w-50">
-                <h3>{prod.title}</h3>
-                <img src={prod.image} alt={prod.title} />
-                <p>{prod.price}</p>
-              </div>
+              <Card product={prod} key={prod.id}/>
             ))}
-          
+          </div>
         </div>
       )}
     </>
