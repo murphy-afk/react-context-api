@@ -7,20 +7,24 @@ import { useBudgetMode } from "../context/BudgetContext";
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { priceLimit } = useBudgetMode();
+  const { priceLimit, budgetMode } = useBudgetMode();
 
   useEffect(() =>
     getProducts()
-    , [priceLimit])
+    , [priceLimit, budgetMode])
 
   function getProducts() {
     setLoading(true)
     axios.get('https://fakestoreapi.com/products')
       .then((resp) => {
         const prodData = resp.data;
-        if (priceLimit !== '') {
-          const filteredProdData = prodData.filter((prod) => prod.price <= priceLimit);
-          setProducts(filteredProdData);
+        if (budgetMode) {
+          const buttonFilteredProdData = prodData.filter((prod) => prod.price <= 30);
+          setProducts(buttonFilteredProdData)
+        }
+        else if (priceLimit !== '') {
+          const inputFilteredProdData = prodData.filter((prod) => prod.price <= priceLimit);
+          setProducts(inputFilteredProdData);
         }
         else {
           setProducts(prodData);
