@@ -1,10 +1,11 @@
-import { useContext } from "react";
+
 import Carousel from "../components/Carousel";
-import { BudgetContext } from "../context/BudgetContext";
+import { useBudgetMode } from "../context/BudgetContext";
 
 export default function Home() {
-  const value = useContext(BudgetContext);
-  console.log(value);
+  const {test} = useBudgetMode();
+  // const { budget, set}
+  console.log(test);
   
   return (
     <>
