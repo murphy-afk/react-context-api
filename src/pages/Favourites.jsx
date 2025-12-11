@@ -1,8 +1,30 @@
 import { useCollections } from "../context/CollectionsContext"
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function Favourites() {
   const { favourites } = useCollections();
   console.log(favourites);
+
+  useEffect(() =>
+    getProducts()
+    , [favourites])
+
+  function getProducts() {
+    axios.get('https://fakestoreapi.com/products')
+      .then((resp) => {
+        const prodData = resp.data;
+        const favProdData = [];
+        prodData.forEach((prod) => {
+          const pId = prod.id;
+          if (favourites.includes(pId)) {
+            favProdData.push(prod)
+          }
+        })
+        console.log(favProdData);
+        
+      })
+  }
 
   return (
     <>

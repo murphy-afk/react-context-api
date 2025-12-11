@@ -3,7 +3,7 @@ import { createContext, useState, useContext } from "react";
 const CollectionsContext = createContext();
 
 function CollectionsProvider({ children }) {
-  const [favourites, setFavourites] = useState([]);
+  const [favourites, setFavourites] = useState([1,2,3]);
   const [cart, setCart] = useState([]);
 
   function isFavourite(id) {
