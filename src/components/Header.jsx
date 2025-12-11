@@ -3,10 +3,10 @@ import Logo from '../assets/Logo.png'
 import { useBudgetMode } from "../context/BudgetContext";
 
 export default function Header() {
-  const {test, budgetMode, setBudgetMode} = useBudgetMode();
-  
+  const { test, budgetMode, setBudgetMode } = useBudgetMode();
+
   console.log(test);
-  
+
 
   return (
     <>
