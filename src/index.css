@@ -1,0 +1,24 @@
+img {
+  max-width: 100%;
+  aspect-ratio: 1;
+}
+
+/* .card p {
+  font-size: 0.7rem;
+} */
+
+html body {
+  background-image: url('./assets/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: difference;
+}
+
+
+html .home-container {
+  max-width: 100%;
+}
+
+.bg-semitransparent {
+  background-color: rgba(25, 24, 24, 0.466);
+}
