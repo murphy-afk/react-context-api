@@ -9,25 +9,28 @@ import PageNotFound from './pages/PageNotFound'
 import Favourites from './pages/Favourites'
 import Cart from './pages/Cart'
 import { BudgetProvider } from './context/BudgetContext'
+import { CollectionsProvider } from './context/CollectionsContext'
 
 function App() {
 
   return (
     <>
       <BudgetProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<DefaultLayout />} >
-              <Route path='/' element={<Home />} />
-              <Route path='/about-us' element={<AboutUs />} />
-              <Route path='/products' element={<Products />} />
-              <Route path='/products/:id' element={<SingleProduct />} />
-              <Route path='/favourites' element={<Favourites/>} />
-              <Route path='/cart' element={<Cart />} />
-            </Route>
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <CollectionsProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<DefaultLayout />} >
+                <Route path='/' element={<Home />} />
+                <Route path='/about-us' element={<AboutUs />} />
+                <Route path='/products' element={<Products />} />
+                <Route path='/products/:id' element={<SingleProduct />} />
+                <Route path='/favourites' element={<Favourites />} />
+                <Route path='/cart' element={<Cart />} />
+              </Route>
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </CollectionsProvider>
       </BudgetProvider>
     </>
   )
