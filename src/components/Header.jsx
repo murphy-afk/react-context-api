@@ -1,13 +1,14 @@
 import { NavLink } from "react-router-dom";
 import Logo from '../assets/Logo.png'
 import { useBudgetMode } from "../context/BudgetContext";
+import { useState } from "react";
 
 export default function Header() {
-  const { test, budgetMode, setBudgetMode } = useBudgetMode();
+  const { priceLimit, setPriceLimit } = useBudgetMode();
 
   return (
     <>
-      <nav className="d-flex bg-dark text-light ps-4 align-items-center justify-content-between">
+      <nav className="d-flex bg-dark text-light ps-4 align-items-center justify-content-between text-nowrap">
         <div className="header-right d-flex gap-2 py-3 ps-4 align-items-center">
           <a className="navbar-brand" href="#">
             <img src={Logo} alt="Logo" />
@@ -15,7 +16,15 @@ export default function Header() {
           <NavLink className='nav-link' to='/'>Home</NavLink>
           <NavLink className='nav-link active' to='/about-us'>About us</NavLink>
           <NavLink className='nav-link' to='/products'>Products</NavLink>
-          <button className="btn btn-outline-light" onClick={() => setBudgetMode(!budgetMode)}>Budget Mode: {budgetMode ? 'on' : 'off'}</button>
+          <input
+            id="price-limit"
+            placeholder='Set Price Limit'
+            className="form-control"
+            type="number"
+            value={priceLimit}
+            onChange={(event) => setPriceLimit(event.target.value)}
+          />
+          {/* <button className="btn btn-outline-light" onClick={() => setBudgetMode(!budgetMode)}>Budget Mode: {budgetMode ? 'on' : 'off'}</button> */}
         </div>
         <div className="header-left pe-4">
           <a href="#" className='text-light'>
