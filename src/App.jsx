@@ -6,11 +6,13 @@ import Products from './pages/Products'
 import SingleProduct from './pages/SingleProduct'
 import DefaultLayout from './layouts/DefaultLayout'
 import PageNotFound from './pages/PageNotFound'
+import { BudgetProvider } from './context/BudgetContext'
 
 function App() {
 
   return (
     <>
+    <BudgetProvider>
       <BrowserRouter>
         <Routes>
           <Route element={<DefaultLayout />} >
@@ -22,6 +24,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
+    </BudgetProvider>
     </>
   )
 }

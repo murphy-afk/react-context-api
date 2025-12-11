@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import Carousel from "../components/Carousel";
+import { BudgetContext } from "../context/BudgetContext";
 
 export default function Home() {
+  const value = useContext(BudgetContext);
+  console.log(value);
+  
   return (
     <>
       <div className="container home-container d-flex flex-column align-items-center w-100 m-0 p-0">
