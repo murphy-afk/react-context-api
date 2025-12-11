@@ -1,7 +1,13 @@
 import { NavLink } from "react-router-dom";
 import Logo from '../assets/Logo.png'
+import { useBudgetMode } from "../context/BudgetContext";
 
 export default function Header() {
+  const {test, budgetMode, setBudgetMode} = useBudgetMode();
+  
+  console.log(test);
+  
+
   return (
     <>
       <nav className="d-flex bg-dark text-light ps-4 align-items-center justify-content-between">
@@ -12,6 +18,7 @@ export default function Header() {
           <NavLink className='nav-link' to='/'>Home</NavLink>
           <NavLink className='nav-link active' to='/about-us'>About us</NavLink>
           <NavLink className='nav-link' to='/products'>Products</NavLink>
+          <button className="btn btn-outline-light" onClick={() => setBudgetMode(!budgetMode)}>Budget Mode: {budgetMode ? 'on' : 'off'}</button>
         </div>
         <div className="header-left pe-4">
           <a href="#" className='text-light'>

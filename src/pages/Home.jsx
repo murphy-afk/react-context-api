@@ -1,11 +1,7 @@
 
 import Carousel from "../components/Carousel";
-import { useBudgetMode } from "../context/BudgetContext";
 
 export default function Home() {
-  const {test} = useBudgetMode();
-  // const { budget, set}
-  console.log(test);
   
   return (
     <>
