@@ -31,7 +31,6 @@ export default function Products() {
         }
         (setLoading(false));
       });
-
   }
   return (
     <>
