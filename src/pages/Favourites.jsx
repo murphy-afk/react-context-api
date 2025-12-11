@@ -1,30 +1,29 @@
-import { useCollections } from "../context/CollectionsContext"
-import { useEffect } from "react";
+import { useCollections } from "../context/CollectionsContext";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Favourites() {
+  const [favItems, setFavItems] = useState([]);
   const { favourites } = useCollections();
-  console.log(favourites);
 
-  useEffect(() =>
-    getProducts()
-    , [favourites])
+  useEffect(() => {
+    if (favourites.length === 0) {
+      setFavItems([]);
+      return;
+    }
 
-  function getProducts() {
-    axios.get('https://fakestoreapi.com/products')
+    axios.get("https://fakestoreapi.com/products")
       .then((resp) => {
         const prodData = resp.data;
-        const favProdData = [];
-        prodData.forEach((prod) => {
-          const pId = prod.id;
-          if (favourites.includes(pId)) {
-            favProdData.push(prod)
-          }
-        })
-        console.log(favProdData);
-        
+        const filtered = prodData.filter((prod) =>
+          favourites.includes(prod.id)
+        );
+        setFavItems(filtered);
       })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [favourites]);
 
   return (
     <>
@@ -32,12 +31,21 @@ export default function Favourites() {
       {favourites.length === 0 ? (
         <div className="container text-center bg-semitransparent py-2 text-light">
           <p>No favourites yet</p>
-        </div>) :
-        (
-          <div>
-            <h1>There are {favourites.length} products in your favourites list</h1>
-          </div>
-        )}
+        </div>
+      ) : (
+        <div>
+          <h1>There are {favourites.length} products in your favourites list</h1>
+          
+            {favItems.map((prod) => (
+              <div key={prod.id} className="row text-center w-50">
+                <h3>{prod.title}</h3>
+                <img src={prod.image} alt={prod.title} />
+                <p>{prod.price}</p>
+              </div>
+            ))}
+          
+        </div>
+      )}
     </>
   );
 }
