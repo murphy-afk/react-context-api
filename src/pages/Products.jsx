@@ -18,26 +18,31 @@ export default function Products() {
     axios.get('https://fakestoreapi.com/products')
       .then((resp) => {
         const prodData = resp.data;
-        if (budgetMode) {
-          const buttonFilteredProdData = prodData.filter((prod) => prod.price <= 30);
-          setProducts(buttonFilteredProdData)
-        }
-        else if (priceLimit !== '') {
-          const inputFilteredProdData = prodData.filter((prod) => prod.price <= priceLimit);
-          setProducts(inputFilteredProdData);
-        }
-        else {
-          setProducts(prodData);
-        }
+        setProducts(prodData);
         (setLoading(false));
       });
   }
+
+  function getFilteredProducts() {
+    let filteredProd;
+    if (budgetMode) {
+      filteredProd = products.filter((prod) => prod.price <= 30);
+    }
+    else if (priceLimit !== '') {
+      filteredProd = products.filter((prod) => prod.price <= priceLimit);
+    }
+    else {
+      filteredProd = products;
+    }
+    return filteredProd
+  }
+
   return (
     <>
       <div className="container pt-3 w-100 p-0">
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
           {loading && <div><p className="text-center fw-bold py-5">Loading...</p></div>}
-          {products.map(product => (
+          {getFilteredProducts(products).map(product => (
             <Card product={product}
               key={product.id}
             />
