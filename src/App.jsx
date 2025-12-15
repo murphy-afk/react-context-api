@@ -8,6 +8,7 @@ import DefaultLayout from './layouts/DefaultLayout'
 import PageNotFound from './pages/PageNotFound'
 import Favourites from './pages/Favourites'
 import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
 import { BudgetProvider } from './context/BudgetContext'
 import { CollectionsProvider } from './context/CollectionsContext'
 
@@ -27,6 +28,7 @@ function App() {
                 <Route path='/favourites' element={<Favourites />} />
                 <Route path='/cart' element={<Cart />} />
               </Route>
+              <Route path='/checkout' element={<Checkout />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </BrowserRouter>

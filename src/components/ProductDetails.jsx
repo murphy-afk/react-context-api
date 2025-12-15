@@ -1,4 +1,9 @@
+import { useNavigate } from "react-router-dom"
+import { useCollections } from "../context/CollectionsContext";
+
 export default function ProductDetails({ product }) {
+  const navigate = useNavigate();
+  const {isInCart, removeFromCart, addToCart} = useCollections();
   return (<div className="row">
     <div className="col-6">
       <img src={product.image} alt={product.title} />
@@ -14,8 +19,10 @@ export default function ProductDetails({ product }) {
           <p>Based on {product.rating.count} reviews</p>
         </div>
       )}
-      <button className="btn btn-outline-light me-2">BUY NOW</button>
-      <button className="btn btn-outline-light">ADD TO CART</button>
+      <button className="btn btn-outline-light me-2" onClick={() => navigate('/checkout')}>BUY NOW</button>
+      <button className="btn btn-outline-light" onClick={() => isInCart(product.id)
+        ? removeFromCart(product.id)
+        : addToCart(product.id)}>ADD TO CART</button>
     </div>
   </div>)
 }

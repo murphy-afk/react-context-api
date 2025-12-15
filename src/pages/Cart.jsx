@@ -1,9 +1,11 @@
 import { useCollections } from "../context/CollectionsContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Cart() {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const { cart } = useCollections();
   const [totalPrice, setTotalPrice] = useState(0)
@@ -44,7 +46,7 @@ export default function Cart() {
             <div className="bg-semitransparent p-3 rounded w-25">
               <p className="text-light">Your total is: {totalPrice}&euro;</p>
               {/* TODO: make checkout page */}
-              <button className="btn btn-outline-light">Go to checkout</button>
+              <button className="btn btn-outline-light" onClick={() => navigate('/checkout')}>Go to checkout</button>
             </div>
           </div>
           {cartItems.map((prod) => (
