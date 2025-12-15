@@ -2,12 +2,13 @@ import { useCollections } from "../context/CollectionsContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const { cart } = useCollections();
+  const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {
-
     axios.get("https://fakestoreapi.com/products")
       .then((resp) => {
         const prodData = resp.data;
@@ -21,16 +22,31 @@ export default function Cart() {
       });
   }, [cart]);
 
+  useEffect(() => {
+    let total = 0;
+    cartItems.forEach(item => {
+      total += item.price;
+    });
+    setTotalPrice(total);
+  }, [cartItems]);
+
   return (
     <>
       <h1 className="text-center pt-0 pb-2 bg-secondary w-100">Your Cart</h1>
       {cart.length === 0 ? (
         <div className="container text-center bg-semitransparent py-2 text-light">
-          <p>Your cart is empty</p>
+          <p className="text-light">Your cart is empty</p>
         </div>
       ) : (
-        <div>
-          <p className="text-light">There are {cart.length} products in your cart</p>
+        <div className="container">
+          <div className="d-flex justify-content-between align-items-center">
+            <p className="text-light">There are {cart.length} products in your cart:</p>
+            <div className="bg-semitransparent p-3 rounded w-25">
+              <p className="text-light">Your total is: {totalPrice}&euro;</p>
+              {/* TODO: make checkout page */}
+              <button className="btn btn-outline-light">Go to checkout</button>
+            </div>
+          </div>
           {cartItems.map((prod) => (
             <div className="card mb-3 w-75" key={prod.id}>
               <div className="row g-0">
@@ -41,7 +57,7 @@ export default function Cart() {
                   <div className="card-body">
                     <h5 className="card-title">{prod.title}</h5>
                     <p className="card-text">{prod.description}</p>
-                    <p className="card-text">{prod.price}</p>
+                    <p className="card-text bg-dark text-center rounded text-light fw-bold">{prod.price}&euro;</p>
                   </div>
                 </div>
               </div>
